@@ -1,0 +1,25 @@
+random_list = [105, 3.1, "Hello", 737, "Python", 2.7, "World", 412, 5.5, "AI"]
+
+# Filter untuk memisahkan nilai float, int, dan string
+float_data = list(filter(lambda x: isinstance(x, float), random_list))
+int_data = list(filter(lambda x: isinstance(x, int), random_list))
+str_data = list(filter(lambda x: isinstance(x, str), random_list))
+
+# Map untuk memetakan nilai int menjadi satuan, puluhan, dan ratusan
+def map_int(x):
+    if isinstance(x, int):
+        satuan = x % 10
+        puluhan = (x // 10) % 10
+        ratusan = x // 100
+        return {'ratusan': ratusan, 'puluhan': puluhan, 'satuan': satuan}
+    return x
+
+int_data_mapped = list(map(map_int, int_data))
+
+# Output
+print("Data Float:", float_data)
+print("Data Int:")
+for item in int_data_mapped:
+    if isinstance(item, dict):
+        print(item)
+print("Data String:", [x for x in str_data if isinstance(x, str)])
